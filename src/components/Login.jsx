@@ -1,7 +1,7 @@
 import React from "react";
 import { Box, Button, Input, FormControl } from "@mui/material";
 import { useState } from "react";
-
+import { Link } from "react-router-dom";
 const Login = () => {
   const [currentUsername, setCurrentUsername] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
@@ -9,6 +9,7 @@ const Login = () => {
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const handleUserChange = (e) => {
     setCurrentUsername(e.target.value);
@@ -20,10 +21,17 @@ const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setSubmission(
-      (submission.username = currentUsername),
-      (submission.password = currentPassword)
-    );
+
+    if (currentUsername.length < 6) {
+      return setError("Invalid username");
+    } else if (currentPassword.length < 1) {
+      return setError("Please enter a password");
+    }
+
+    setSubmission({
+      username: currentUsername,
+      password: currentPassword,
+    });
     console.log(submission);
   };
 
@@ -40,9 +48,10 @@ const Login = () => {
     >
       <p>Login</p>
 
-      <FormControl sx={{ width: "400px" }}>
+      <FormControl sx={{ margin: "10px", padding: "10px" }}>
         <label>Username</label>
         <Input
+          sx={{ width: "300px" }}
           onChange={handleUserChange}
           placeholder="Username"
           required="true"
@@ -51,9 +60,10 @@ const Login = () => {
         />
       </FormControl>
 
-      <FormControl sx={{ width: "400px" }}>
+      <FormControl sx={{ margin: "10px", padding: "10px" }}>
         <label>Password</label>
         <Input
+          sx={{ width: "300px" }}
           onChange={handlePassChange}
           placeholder="Password"
           required="true"
@@ -62,9 +72,12 @@ const Login = () => {
         />
       </FormControl>
 
+      <p>{error}</p>
       <form>
         <Button onClick={onSubmit}>Login</Button>
-        <Button>Create Account</Button>
+        <Link to="/signup">
+          <Button>Create Account</Button>
+        </Link>
       </form>
     </Box>
   );
