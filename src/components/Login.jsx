@@ -54,7 +54,6 @@ const Login = () => {
           sx={{ width: "300px" }}
           onChange={handleUserChange}
           placeholder="Username"
-          required="true"
           type="text"
           value={currentUsername}
         />
@@ -66,7 +65,6 @@ const Login = () => {
           sx={{ width: "300px" }}
           onChange={handlePassChange}
           placeholder="Password"
-          required="true"
           type="password"
           value={currentPassword}
         />
