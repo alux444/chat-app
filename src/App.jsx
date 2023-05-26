@@ -1,9 +1,14 @@
 import "./App.css";
+import { BrowserRouter } from "react-router-dom";
+import Views from "./components/Views";
 
 function App() {
   return (
     <>
-      <p>App</p>
+      <BrowserRouter>
+        <p>App</p>
+        <Views />
+      </BrowserRouter>
     </>
   );
 }
