@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
+import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import SignUp from "./SignUp";
 import Login from "./Login";
 import Home from "./Home";
@@ -9,14 +9,18 @@ import { AccountContext } from "./AccountContext";
 const Views = () => {
   const { user } = useContext(AccountContext);
   const navigate = useNavigate();
-  const [initialRedirect, setInitialRedirect] = useState(false);
+
+  const location = useLocation();
+  const pathname = location.pathname;
 
   useEffect(() => {
-    if (user.loggedIn && !initialRedirect) {
+    if (user.loggedIn && pathname === "/") {
       navigate("/home");
-      setInitialRedirect(true);
     }
-  }, [user.loggedIn, navigate, initialRedirect]);
+    if (!user.loggedIn && pathname === "/signup") {
+      navigate("/signup");
+    }
+  }, [user.loggedIn, navigate]);
 
   return user.loggedIn === null ? (
     ""

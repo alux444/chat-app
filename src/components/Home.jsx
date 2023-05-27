@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Box, Button } from "@mui/material";
 import { AccountContext } from "./AccountContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Home = () => {
   const { user, setUser } = useContext(AccountContext);

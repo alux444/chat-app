@@ -8,8 +8,8 @@ const router = express.Router();
 router
   .route("/login")
   .get(handleLogin)
-  .post(validate, rateLimiter(3), attemptLogin);
+  .post(validate, rateLimiter(10), attemptLogin);
 
-router.post("/signup", validate, rateLimiter, handleSignup);
+router.post("/signup", validate, rateLimiter(3), handleSignup);
 
 export default router;

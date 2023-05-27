@@ -65,7 +65,11 @@ const Login = () => {
         if (!data) return;
         setUser({ ...data });
         console.log(data);
-        navigate("/home");
+        if (data.loggedIn) {
+          navigate("/home");
+        } else {
+          setError(data.status);
+        }
       });
 
     resetForm();

@@ -80,7 +80,11 @@ const SignUp = () => {
         if (!data) return;
         console.log(data);
         setUser({ ...data });
-        navigate("/home");
+        if (data.loggedIn) {
+          navigate("/home");
+        } else {
+          setError(data.status);
+        }
       });
 
     resetForm();
