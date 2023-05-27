@@ -7,23 +7,19 @@ const router = express.Router();
 
 router.post("/login", async (req, res) => {
   validate(req, res);
-  console.log("test");
 
   const potentialLogin = await pool.query(
-    "SELECT id, username FROM users u WHERE u.username=$1 AND u.password=$2",
-    [req.body.username, req.body.password]
+    "SELECT id, username, password FROM users WHERE username=$1",
+    [req.body.username]
   );
 
-  console.log(potentialLogin);
-
   if (potentialLogin.rowCount > 0) {
-    const passwordMatch = bcrypt.compare(
+    const passwordMatch = await bcrypt.compare(
       req.body.password,
       potentialLogin.rows[0].password
     );
 
     if (passwordMatch) {
-      //login
       req.session.user = {
         username: req.body.username,
         id: potentialLogin.rows[0].id,
@@ -31,7 +27,6 @@ router.post("/login", async (req, res) => {
       res.json({ loggedIn: true, username: req.body.username });
     } else {
       //dont login
-      console.log("hhehee");
     }
   } else {
     res.json({ loggedIn: false, status: "Incorrect username or password" });
@@ -48,6 +43,9 @@ router.post("/signup", async (req, res) => {
 
   if (existingUser.rowCount === 0) {
     const hashedPass = await bcrypt.hash(req.body.password, 10);
+
+    console.log(hashedPass);
+
     const newUserQuery = await pool.query(
       "INSERT INTO users(username,password) VALUES ($1,$2) RETURNING id, username",
       [req.body.username, hashedPass]
