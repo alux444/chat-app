@@ -7,6 +7,8 @@ import cors from "cors";
 import router from "./routers/authRouter.js";
 import dotenv from "dotenv";
 dotenv.config();
+import RedisStore from "connect-redis";
+import { Redis } from "ioredis";
 
 const app = express();
 const port = 5173;
@@ -18,6 +20,12 @@ const io = new Server(server, {
   },
 });
 
+let redisClient = new Redis();
+let redisStore = new RedisStore({
+  client: redisClient,
+  session: session,
+});
+
 app.use(helmet());
 
 app.use(
@@ -27,7 +35,6 @@ app.use(
   })
 );
 
-// Add the following middleware before your routes
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "http://localhost:5173");
   res.header(
@@ -42,6 +49,7 @@ app.use(express.json());
 
 app.use(
   session({
+    store: redisStore,
     secret: process.env.COOKIE_SECRET,
     credentials: true,
     resave: false,

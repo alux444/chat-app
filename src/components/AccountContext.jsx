@@ -10,7 +10,6 @@ const UserContext = ({ children }) => {
       credentials: "include",
     })
       .catch((err) => {
-        console.log("lerrrorr");
         setUser({ loggedIn: false });
         return;
       })
@@ -26,7 +25,6 @@ const UserContext = ({ children }) => {
           setUser({ loggedIn: false });
           return;
         }
-        console.log("logged in");
         setUser({ ...data });
       });
   }, []);
