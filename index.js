@@ -2,8 +2,11 @@ import express from "express";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import helmet from "helmet";
+import session from "express-session";
 import cors from "cors";
 import router from "./routers/authRouter.js";
+import dotenv from "dotenv";
+dotenv.config();
 
 const app = express();
 const port = 5173;
@@ -24,6 +27,20 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use(
+  session({
+    secret: process.env.COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    name: "sid",
+    cookie: {
+      secure: process.env.ENVIRONMENT === "production",
+      httpOnly: true,
+      sameSite: process.env.ENVIRONMENT === "production" ? "none" : "lax",
+    },
+  })
+);
 
 app.use("/auth", router);
 
