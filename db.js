@@ -1,11 +1,14 @@
-import { Pool } from "pg";
+import dotenv from "dotenv";
+dotenv.config();
+import pkg from "pg";
+const { Pool } = pkg;
 
 const pool = new Pool({
-  database: import.meta.env.VITE_DATABASE_NAME,
-  host: import.meta.env.VITE_DATABASE_HOST,
-  password: import.meta.env.VITE_DATABASE_PASSWORD,
-  user: import.meta.env.VITE_DATABASE_USER,
-  port: import.meta.env.VITE_DATABASE_PORT,
+  database: process.env.VITE_DATABASE_NAME,
+  host: process.env.VITE_DATABASE_HOST,
+  password: process.env.VITE_DATABASE_PASSWORD,
+  user: process.env.VITE_DATABASE_USER,
+  port: process.env.VITE_DATABASE_PORT,
 });
 
 export default pool;
