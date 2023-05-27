@@ -4,11 +4,11 @@ import { Server } from "socket.io";
 import helmet from "helmet";
 import session from "express-session";
 import cors from "cors";
-import router from "./routers/authRouter.js";
+import router from "./server/authRouter.js";
 import dotenv from "dotenv";
 dotenv.config();
 import RedisStore from "connect-redis";
-import { Redis } from "ioredis";
+import redisClient from "./redis.js";
 
 const app = express();
 const port = 5173;
@@ -20,7 +20,6 @@ const io = new Server(server, {
   },
 });
 
-let redisClient = new Redis();
 let redisStore = new RedisStore({
   client: redisClient,
   session: session,
