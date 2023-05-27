@@ -57,7 +57,7 @@ const SignUp = () => {
 
     console.log(submission);
 
-    fetch("http://localhost:4000"),
+    fetch("http://localhost:4000/auth/signup"),
       {
         method: "POST",
         credentials: "include",
@@ -65,7 +65,21 @@ const SignUp = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(submission),
-      };
+      }
+        .catch((err) => {
+          console.log(err);
+          return;
+        })
+        .then((res) => {
+          if (!res || !res.ok || res.status >= 400) {
+            return;
+          }
+          return res.json();
+        })
+        .then((data) => {
+          if (!data) return;
+          console.log(data);
+        });
 
     resetForm();
   };
