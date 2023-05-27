@@ -5,10 +5,6 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [currentUsername, setCurrentUsername] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
-  const [submission, setSubmission] = useState({
-    username: "",
-    password: "",
-  });
   const [error, setError] = useState("");
 
   const resetForm = () => {
@@ -33,37 +29,38 @@ const Login = () => {
       return setError("Please enter a password");
     }
 
-    setSubmission({
+    const values = {
       username: currentUsername,
       password: currentPassword,
-    });
-    console.log(submission);
+    };
 
-    fetch("http://localhost:4000/auth/signup"),
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(submission),
-      }
-        .catch((err) => {
-          console.log(err);
+    console.log(values);
+
+    console.log(JSON.stringify(values));
+
+    fetch("http://localhost:4000/auth/login", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .catch((err) => {
+        return;
+      })
+      .then((res) => {
+        if (!res || !res.ok || res.status >= 400) {
           return;
-        })
-        .then((res) => {
-          if (!res || !res.ok || res.status >= 400) {
-            return;
-          }
-          return res.json();
-        })
-        .then((data) => {
-          if (!data) return;
-          console.log(data);
-        });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!data) return;
+        console.log(data);
+      });
 
-    resetForm();
+    // resetForm();
   };
 
   return (

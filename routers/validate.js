@@ -7,7 +7,7 @@ const validate = (req, res) => {
     errors.username = "Username required";
   } else if (formData.username.length < 6) {
     errors.username = "Username too short";
-  } else if (formData.username.length > 28) {
+  } else if (formData.username.length > 20) {
     errors.username = "Username too long!";
   }
 
@@ -16,7 +16,7 @@ const validate = (req, res) => {
     errors.password = "Password required";
   } else if (formData.password.length < 6) {
     errors.password = "Password too short";
-  } else if (formData.password.length > 28) {
+  } else if (formData.password.length > 30) {
     errors.password = "Password too long!";
   }
 

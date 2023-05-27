@@ -7,11 +7,14 @@ const router = express.Router();
 
 router.post("/login", async (req, res) => {
   validate(req, res);
+  console.log("test");
 
   const potentialLogin = await pool.query(
     "SELECT id, username FROM users u WHERE u.username=$1 AND u.password=$2",
-    [req.body.username]
+    [req.body.username, req.body.password]
   );
+
+  console.log(potentialLogin);
 
   if (potentialLogin.rowCount > 0) {
     const passwordMatch = bcrypt.compare(

@@ -14,23 +14,36 @@ const server = createServer(app);
 const io = new Server(server, {
   cors: {
     origin: "http://localhost:5173",
-    credentials: "true",
+    credentials: true,
   },
 });
 
 app.use(helmet());
+
 app.use(
   cors({
-    origin: "http:/localhost:5173",
-    credentials: "true",
+    origin: "http://localhost:5173",
+    credentials: true,
   })
 );
+
+// Add the following middleware before your routes
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "http://localhost:5173");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
 
 app.use(express.json());
 
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
+    credentials: true,
     resave: false,
     saveUninitialized: false,
     name: "sid",

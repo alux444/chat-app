@@ -7,10 +7,6 @@ const SignUp = () => {
   const [currentUsername, setCurrentUsername] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [confirmingPassword, setConfirmingPassword] = useState("");
-  const [submission, setSubmission] = useState({
-    username: "",
-    password: "",
-  });
   const [error, setError] = useState("");
 
   const resetForm = () => {
@@ -41,7 +37,7 @@ const SignUp = () => {
     e.preventDefault();
 
     if (currentUsername.length < 6) {
-      return setError("Username is to short");
+      return setError("Invalid username");
     } else if (currentPassword.length < 1) {
       return setError("Please enter a password");
     }
@@ -50,36 +46,36 @@ const SignUp = () => {
       return setError("Passwords do not match");
     }
 
-    setSubmission({
+    const values = {
       username: currentUsername,
       password: currentPassword,
-    });
+    };
 
-    console.log(submission);
+    console.log(values);
 
-    fetch("http://localhost:4000/auth/signup"),
-      {
-        method: "POST",
-        credentials: "include",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(submission),
-      }
-        .catch((err) => {
-          console.log(err);
+    console.log(JSON.stringify(values));
+
+    fetch("http://localhost:4000/auth/signup", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values),
+    })
+      .catch((err) => {
+        return;
+      })
+      .then((res) => {
+        if (!res || !res.ok || res.status >= 400) {
           return;
-        })
-        .then((res) => {
-          if (!res || !res.ok || res.status >= 400) {
-            return;
-          }
-          return res.json();
-        })
-        .then((data) => {
-          if (!data) return;
-          console.log(data);
-        });
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!data) return;
+        console.log(data);
+      });
 
     resetForm();
   };
