@@ -1,4 +1,4 @@
-const validate = (req, res) => {
+const validate = (req, res, next) => {
   const formData = req.body;
   const errors = {};
 
@@ -25,6 +25,7 @@ const validate = (req, res) => {
     console.log(errors);
   } else {
     console.log("Form is valid");
+    next();
     // Continue with further processing if the form is valid
   }
 };
