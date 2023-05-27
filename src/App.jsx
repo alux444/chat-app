@@ -1,14 +1,17 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import Views from "./components/Views";
+import UserContext from "./components/AccountContext";
 
 function App() {
   return (
     <>
-      <BrowserRouter>
-        <p>App</p>
-        <Views />
-      </BrowserRouter>
+      <UserContext>
+        <BrowserRouter>
+          <p>App</p>
+          <Views />
+        </BrowserRouter>
+      </UserContext>
     </>
   );
 }

@@ -1,9 +1,12 @@
 import React from "react";
 import { Box, Button, Input, FormControl } from "@mui/material";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { AccountContext } from "./AccountContext";
 
 const Login = () => {
+  const { setUser } = useContext(AccountContext);
+
   const [currentUsername, setCurrentUsername] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [error, setError] = useState("");
@@ -60,7 +63,7 @@ const Login = () => {
       })
       .then((data) => {
         if (!data) return;
-        console.log("heleoo");
+        setUser({ ...data });
         console.log(data);
         navigate("/home");
       });
