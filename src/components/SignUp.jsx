@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Box, Button, FormControl, Input } from "@mui/material";
 import { useState } from "react";
 
@@ -8,6 +8,8 @@ const SignUp = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [confirmingPassword, setConfirmingPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const resetForm = () => {
     setCurrentPassword("");
@@ -75,6 +77,7 @@ const SignUp = () => {
       .then((data) => {
         if (!data) return;
         console.log(data);
+        navigate("/home");
       });
 
     resetForm();

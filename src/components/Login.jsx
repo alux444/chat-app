@@ -1,11 +1,14 @@
 import React from "react";
 import { Box, Button, Input, FormControl } from "@mui/material";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 const Login = () => {
   const [currentUsername, setCurrentUsername] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [error, setError] = useState("");
+
+  const navigate = useNavigate();
 
   const resetForm = () => {
     setCurrentPassword("");
@@ -57,10 +60,12 @@ const Login = () => {
       })
       .then((data) => {
         if (!data) return;
+        console.log("heleoo");
         console.log(data);
+        navigate("/home");
       });
 
-    // resetForm();
+    resetForm();
   };
 
   return (
