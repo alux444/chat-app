@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import Views from "./components/Views";
 import UserContext from "./components/AccountContext";
 
@@ -7,10 +7,10 @@ function App() {
   return (
     <>
       <UserContext>
-        <BrowserRouter>
+        <Router>
           <p>App</p>
           <Views />
-        </BrowserRouter>
+        </Router>
       </UserContext>
     </>
   );

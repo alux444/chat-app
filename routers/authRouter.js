@@ -5,33 +5,43 @@ import bcrypt from "bcrypt";
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
-  validate(req, res);
+router
+  .route("/login")
+  .get(async (req, res) => {
+    if (req.session.user && req.session.user.username) {
+      console.log("in");
+      res.json({ loggedIn: true, username: req.session.user.username });
+    } else {
+      res.json({ loggedIn: false });
+    }
+  })
+  .post(async (req, res) => {
+    validate(req, res);
 
-  const potentialLogin = await pool.query(
-    "SELECT id, username, password FROM users WHERE username=$1",
-    [req.body.username]
-  );
-
-  if (potentialLogin.rowCount > 0) {
-    const passwordMatch = await bcrypt.compare(
-      req.body.password,
-      potentialLogin.rows[0].password
+    const potentialLogin = await pool.query(
+      "SELECT id, username, password FROM users WHERE username=$1",
+      [req.body.username]
     );
 
-    if (passwordMatch) {
-      req.session.user = {
-        username: req.body.username,
-        id: potentialLogin.rows[0].id,
-      };
-      res.json({ loggedIn: true, username: req.body.username });
+    if (potentialLogin.rowCount > 0) {
+      const passwordMatch = await bcrypt.compare(
+        req.body.password,
+        potentialLogin.rows[0].password
+      );
+
+      if (passwordMatch) {
+        req.session.user = {
+          username: req.body.username,
+          id: potentialLogin.rows[0].id,
+        };
+        res.json({ loggedIn: true, username: req.body.username });
+      } else {
+        //dont login
+      }
     } else {
-      //dont login
+      res.json({ loggedIn: false, status: "Incorrect username or password" });
     }
-  } else {
-    res.json({ loggedIn: false, status: "Incorrect username or password" });
-  }
-});
+  });
 
 router.post("/signup", async (req, res) => {
   validate(req, res);
