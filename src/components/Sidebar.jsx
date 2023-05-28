@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { ChatContext, FriendContext } from "./Home";
+import AddFriend from "./AddFriend";
 
 const Sidebar = () => {
   const test = () => {
@@ -10,6 +11,15 @@ const Sidebar = () => {
 
   const { friendList, setFriendList } = useContext(FriendContext);
   const { setCurrentChat } = useContext(ChatContext);
+  const [openAddFriend, setOpenAddFriend] = useState(false);
+
+  const closeAddFriends = () => {
+    setOpenAddFriend(false);
+  };
+
+  const openAddFriends = () => {
+    setOpenAddFriend(true);
+  };
 
   const friends = friendList.map((friend) => (
     <Box sx={{ display: "flex", justifyContent: "center" }}>
@@ -44,6 +54,7 @@ const Sidebar = () => {
       <p>sidebar</p>
       <button onClick={test}>aa</button>
       <Button
+        onClick={openAddFriends}
         sx={{
           width: "150px",
           padding: "5px",
@@ -67,6 +78,7 @@ const Sidebar = () => {
         Public Chat
       </Button>
       {friends}
+      <AddFriend open={openAddFriend} close={closeAddFriends} />
     </Box>
   );
 };
