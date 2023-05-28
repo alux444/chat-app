@@ -12,7 +12,15 @@ const AddFriend = ({ open, close }) => {
   const [currentUsername, setCurrentUsername] = useState("");
 
   const handleUserChange = (e) => {
-    setCurrentUsername(e.target.value);
+    if (e.target.value.length < 20) {
+      setCurrentUsername(e.target.value);
+    }
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    alert("Friend request sent to: " + currentUsername);
+    setCurrentUsername("");
   };
 
   return (
@@ -37,7 +45,7 @@ const AddFriend = ({ open, close }) => {
         >
           <Typography variant="small">Add a friend</Typography>
 
-          <FormControl sx={{ padding: "10px" }}>
+          <form onSubmit={onSubmit}>
             <Input
               sx={{ width: "300px" }}
               onChange={handleUserChange}
@@ -45,8 +53,8 @@ const AddFriend = ({ open, close }) => {
               type="text"
               value={currentUsername}
             />
-            <Button>Add Friend!</Button>
-          </FormControl>
+            <Button type="submit">Add Friend!</Button>
+          </form>
         </Box>
       </Modal>
     </Box>

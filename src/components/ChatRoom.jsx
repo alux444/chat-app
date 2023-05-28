@@ -6,7 +6,7 @@ const ChatRoom = () => {
   const { currentChat } = useContext(ChatContext);
 
   const chat = currentChat.map((chat) => (
-    <Box>
+    <Box key={chat.username}>
       <small>
         Currently chatting with : {chat.username} (
         {chat.connected ? "online" : "offline"})

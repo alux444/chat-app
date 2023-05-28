@@ -4,10 +4,7 @@ import { ChatContext, FriendContext } from "./Home";
 import AddFriend from "./AddFriend";
 
 const Sidebar = () => {
-  const test = () => {
-    console.log(setCurrentChat);
-    setCurrentChat([]);
-  };
+  const test = () => {};
 
   const { friendList, setFriendList } = useContext(FriendContext);
   const { setCurrentChat } = useContext(ChatContext);
@@ -22,7 +19,10 @@ const Sidebar = () => {
   };
 
   const friends = friendList.map((friend) => (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box
+      key={friend.username}
+      sx={{ display: "flex", justifyContent: "center" }}
+    >
       <Button
         onClick={() =>
           setCurrentChat([
@@ -50,8 +50,14 @@ const Sidebar = () => {
   ));
 
   return (
-    <Box sx={{ display: "inline-block", overflow: "auto", height: "100%" }}>
-      <p>sidebar</p>
+    <Box
+      sx={{
+        display: "inline-block",
+        overflow: "auto",
+        height: "100%",
+        padding: "5px",
+      }}
+    >
       <button onClick={test}>aa</button>
       <Button
         onClick={openAddFriends}
