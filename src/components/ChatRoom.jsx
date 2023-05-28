@@ -3,11 +3,10 @@ import React, { useContext } from "react";
 import { ChatContext, FriendContext } from "./Home";
 
 const ChatRoom = () => {
-  const { currentChat, setCurrentChat } = useContext(ChatContext);
+  const { currentChat } = useContext(ChatContext);
 
   const chat = currentChat.map((chat) => (
     <Box>
-      <p>Chat Room</p>
       <small>
         Currently chatting with : {chat.username} (
         {chat.connected ? "online" : "offline"})

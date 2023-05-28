@@ -22,14 +22,14 @@ const Sidebar = () => {
             },
           ])
         }
+        size="small"
         sx={{
           display: "block",
           border: "3px solid",
           borderColor: friend.connected ? "green" : "red",
-          height: "min-content",
           width: "150px",
           padding: "5px",
-          margin: "1  5px",
+          margin: "5px",
           borderRadius: "27px",
         }}
       >
@@ -40,7 +40,7 @@ const Sidebar = () => {
   ));
 
   return (
-    <Box sx={{ display: "inline-block" }}>
+    <Box sx={{ display: "inline-block", overflow: "auto", height: "100%" }}>
       <p>sidebar</p>
       <button onClick={test}>aa</button>
       <Button
@@ -48,7 +48,17 @@ const Sidebar = () => {
           width: "150px",
           padding: "5px",
           margin: "1  5px",
-          borderRadius: "27px",
+          borderRadius: "15px",
+        }}
+      >
+        Add Friend
+      </Button>
+      <Button
+        sx={{
+          width: "150px",
+          padding: "5px",
+          margin: "1  5px",
+          borderRadius: "15px",
         }}
         onClick={() =>
           setCurrentChat([{ username: "public", connected: true }])
