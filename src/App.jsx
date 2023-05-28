@@ -8,7 +8,6 @@ function App() {
     <>
       <UserContext>
         <Router>
-          <p>App</p>
           <Views />
         </Router>
       </UserContext>
