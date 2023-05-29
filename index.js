@@ -1,19 +1,17 @@
-import express from "express";
 import { createServer } from "http";
-import { Server } from "socket.io";
 import helmet from "helmet";
 import cors from "cors";
 import router from "./server/authRouter.js";
+import express from "express";
+import { Server } from "socket.io";
 import dotenv from "dotenv";
 dotenv.config();
-import { sessionMiddleware, wrap, corsConfig } from "./server/serverControl.js";
+
+import { sessionMiddleware, corsConfig } from "./server/serverControl.js";
 
 const app = express();
 const server = createServer(app);
-
-const io = new Server(server, {
-  cors: corsConfig,
-});
+const io = new Server(server);
 
 app.use(helmet());
 app.use(cors(corsConfig));
@@ -23,12 +21,6 @@ app.use("/auth", router);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
-});
-
-io.use(wrap(sessionMiddleware));
-io.on("connect", (socket) => {
-  console.log("hello");
-  console.log(socket.request.user.username);
 });
 
 app.listen(4000, () => {

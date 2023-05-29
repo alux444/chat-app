@@ -11,3 +11,4 @@ CREATE TABLE messages (
 )
 
 INSERT INTO users(username, password) VALUES($1, $2)
+INSERT INTO messages(message, username) VALUES($1, $2)
