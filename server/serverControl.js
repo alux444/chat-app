@@ -5,10 +5,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 export const sessionMiddleware = session({
-  store: new RedisStore({ client: redisClient }),
   secret: process.env.COOKIE_SECRET,
   credentials: true,
   resave: false,
+  store: new RedisStore({ client: redisClient }),
   saveUninitialized: false,
   name: "sid",
   cookie: {
@@ -19,9 +19,8 @@ export const sessionMiddleware = session({
   },
 });
 
-export const wrap = (expressMiddleware) => {
-  (socket, next) => expressMiddleware(socket.request, {}, next);
-};
+export const wrap = (expressMiddleware) => (socket, next) =>
+  expressMiddleware(socket.request, {}, next);
 
 export const corsConfig = {
   origin: "http://localhost:5173",
