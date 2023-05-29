@@ -14,11 +14,11 @@ const router = express.Router();
 router
   .route("/login")
   .get(handleLogin)
-  .post(validate, rateLimiter(10), attemptLogin);
+  .post(validate, rateLimiter(10, 50), attemptLogin);
 
-router.post("/signup", validate, rateLimiter(3), handleSignup);
+router.post("/signup", validate, rateLimiter(3, 60), handleSignup);
 
-router.post("/messages", rateLimiter(5), handleMessage);
+router.post("/messages", rateLimiter(20, 30), handleMessage);
 
 router.get("/getmessages", getMessages);
 

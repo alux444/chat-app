@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "./AccountContext";
 import { Button, TextField } from "@mui/material";
+import socket from "../../server/socket";
 
 const ChatBar = () => {
   const [message, setMessage] = useState("");
@@ -42,6 +43,8 @@ const ChatBar = () => {
         else {
           setError(data.status);
         }
+
+        socket.emit("new-message", true);
       });
 
     setMessage("");

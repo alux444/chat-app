@@ -2,10 +2,12 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useEffect, useState, useRef } from "react";
 import { AccountContext } from "./AccountContext";
+import socket from "../../server/socket";
 
 const MessageBox = () => {
   const [allMessages, setAllMessages] = useState([]);
   const { user } = useContext(AccountContext);
+  const [refresh, setRefresh] = useState(false);
   const latestMessages = useRef(null);
 
   useEffect(() => {
@@ -15,6 +17,10 @@ const MessageBox = () => {
   const scrollToBottom = () => {
     latestMessages.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  socket.on("received-message", () => {
+    setRefresh(!refresh);
+  });
 
   useEffect(() => {
     fetch("http://localhost:4000/auth/getmessages")
@@ -33,10 +39,10 @@ const MessageBox = () => {
         // Handle any network or request errors
         console.log(error);
       });
-  }, []);
+  }, [refresh]);
 
   const test = () => {
-    console.log(allMessages);
+    console.log(refresh);
   };
 
   const mappedMessages = allMessages.map((message) => (
@@ -70,6 +76,7 @@ const MessageBox = () => {
         overflow: "auto",
       }}
     >
+      <button onClick={test}>aaa</button>
       {mappedMessages}
       <div ref={latestMessages} />
     </Box>

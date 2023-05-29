@@ -6,12 +6,10 @@ import express from "express";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
 dotenv.config();
-
 import { sessionMiddleware, corsConfig } from "./server/serverControl.js";
 
 const app = express();
 const server = createServer(app);
-const io = new Server(server);
 
 app.use(helmet());
 app.use(cors(corsConfig));
@@ -23,6 +21,26 @@ app.get("/", (req, res) => {
   res.send("Hello, World!");
 });
 
-app.listen(4000, () => {
-  console.log("listening on 4000");
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:5173",
+    credentials: true,
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("A user connected. Socket ID:", socket.id);
+
+  socket.on("disconnect", () => {
+    console.log("A user disconnected. Socket ID:", socket.id);
+  });
+
+  socket.on("new-message", (boolean) => {
+    console.log(boolean);
+    io.emit("received-message", true);
+  });
+});
+
+server.listen(4000, () => {
+  console.log("Socket.IO server listening on port 4000");
 });
