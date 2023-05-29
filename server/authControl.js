@@ -67,7 +67,7 @@ export const handleMessage = async (req, res) => {
 
   try {
     const insertMessageQuery = await pool.query(
-      "INSERT INTO messages(message, username, time, chatroom) VALUES($1, $2, NOW(), $3)",
+      "INSERT INTO messages(message, username, time, chatroom) VALUES($1, $2, current_timestamp at time zone 'NZ', $3)",
       [message, username, chatroom]
     );
 

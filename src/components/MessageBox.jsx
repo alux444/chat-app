@@ -67,16 +67,32 @@ const MessageBox = () => {
         width: "100%",
       }}
     >
-      <Typography
-        sx={{
-          float: message.username === user.username ? "right" : "left",
-          border: "2px solid green",
-          padding: "5px",
-          borderRadius: "10px",
-        }}
-      >
-        {message.username} : {message.message}
-      </Typography>
+      <Box sx={{ display: "flex", flexDirection: "column" }}>
+        <Typography
+          sx={{
+            alignSelf:
+              message.username === user.username ? "flex-end" : "flex-start",
+            padding: "5px",
+            borderRadius: "10px",
+          }}
+        >
+          {message.username === user.username ? "You" : message.username} (
+          {message.time.slice(0, 10)})
+        </Typography>
+        <Typography
+          sx={{
+            alignSelf:
+              message.username === user.username ? "flex-end" : "flex-start",
+            border: "2px solid green",
+            padding: "5px",
+            borderRadius: "10px",
+            wordBreak: "break-word",
+            maxWidth: "80%",
+          }}
+        >
+          {message.message}
+        </Typography>
+      </Box>
     </Box>
   ));
 
