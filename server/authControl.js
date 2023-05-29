@@ -60,3 +60,28 @@ export const handleSignup = async (req, res) => {
     res.json({ loggedIn: false, status: "Username taken :(" });
   }
 };
+
+export const handleMessage = async (req, res) => {
+  const { message, username } = req.body;
+  console.log(message, username);
+
+  try {
+    const insertMessageQuery = await pool.query(
+      "INSERT INTO messages (message, username) VALUES ($1, $2) RETURNING id, message, username",
+      [message, username]
+    );
+
+    res.json({ success: true, message: "Message added to the database." });
+  } catch (error) {
+    res.json({ success: false, message: "Failed to add the message." });
+  }
+};
+
+export const getMessages = async (req, res) => {
+  try {
+    const messages = await pool.query("SELECT * FROM messages");
+    res.json({ success: true, messages: messages.rows });
+  } catch (error) {
+    res.json({ success: false, message: "Failed to retrieve messages." });
+  }
+};

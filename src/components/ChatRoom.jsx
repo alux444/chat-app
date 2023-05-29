@@ -2,6 +2,7 @@ import { Box } from "@mui/material";
 import React, { useContext } from "react";
 import { ChatContext, FriendContext } from "./Home";
 import ChatBar from "./ChatBar";
+import MessageBox from "./MessageBox";
 
 const ChatRoom = () => {
   const { currentChat } = useContext(ChatContext);
@@ -15,6 +16,7 @@ const ChatRoom = () => {
         Currently chatting with : {chat.username} (
         {chat.connected ? "online" : "offline"})
       </small>
+      <MessageBox />
       <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>
         <ChatBar />
       </Box>

@@ -1,9 +1,11 @@
 import React, { useContext, useState } from "react";
-import UserContext from "./AccountContext";
+import { AccountContext } from "./AccountContext";
 import { Button, TextField } from "@mui/material";
 
 const ChatBar = () => {
   const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const { user } = useContext(AccountContext);
 
   const handleChange = (e) => {
     if (e.target.value.length < 250) {
@@ -13,8 +15,35 @@ const ChatBar = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const submittedMessage = message;
-    console.log(message);
+    const submittedMessage = {
+      username: user.username,
+      message: message,
+    };
+
+    fetch("http://localhost:4000/auth/messages", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(submittedMessage),
+    })
+      .catch((err) => {
+        return;
+      })
+      .then((res) => {
+        if (!res || !res.ok || res.status >= 400) {
+          return;
+        }
+        return res.json();
+      })
+      .then((data) => {
+        if (!data) return;
+        else {
+          setError(data.status);
+        }
+      });
+
     setMessage("");
   };
 
