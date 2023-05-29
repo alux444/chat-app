@@ -2,11 +2,13 @@ import React, { useContext, useState } from "react";
 import { AccountContext } from "./AccountContext";
 import { Button, TextField } from "@mui/material";
 import socket from "../../server/socket";
+import { ChatContext } from "./Home";
 
 const ChatBar = () => {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const { user } = useContext(AccountContext);
+  const { currentChat } = useContext(ChatContext);
 
   const handleChange = (e) => {
     if (e.target.value.length < 250) {
@@ -19,6 +21,7 @@ const ChatBar = () => {
     const submittedMessage = {
       username: user.username,
       message: message,
+      chatroom: currentChat[0].username,
     };
 
     fetch("http://localhost:4000/auth/messages", {

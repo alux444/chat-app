@@ -62,13 +62,13 @@ export const handleSignup = async (req, res) => {
 };
 
 export const handleMessage = async (req, res) => {
-  const { message, username } = req.body;
+  const { message, username, chatroom } = req.body;
   console.log(message, username);
 
   try {
     const insertMessageQuery = await pool.query(
-      "INSERT INTO messages (message, username) VALUES ($1, $2) RETURNING id, message, username",
-      [message, username]
+      "INSERT INTO messages(message, username, time, chatroom) VALUES($1, $2, NOW(), $3)",
+      [message, username, chatroom]
     );
 
     res.json({ success: true, message: "Message added to the database." });
@@ -78,8 +78,12 @@ export const handleMessage = async (req, res) => {
 };
 
 export const getMessages = async (req, res) => {
+  const { chatroom } = req.query;
   try {
-    const messages = await pool.query("SELECT * FROM messages");
+    const messages = await pool.query(
+      "SELECT * FROM messages WHERE chatroom = $1",
+      [chatroom]
+    );
     res.json({ success: true, messages: messages.rows });
   } catch (error) {
     res.json({ success: false, message: "Failed to retrieve messages." });

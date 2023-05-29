@@ -3,15 +3,18 @@ import React, { useContext } from "react";
 import { useEffect, useState, useRef } from "react";
 import { AccountContext } from "./AccountContext";
 import socket from "../../server/socket";
+import { ChatContext } from "./Home";
 
 const MessageBox = () => {
   const [allMessages, setAllMessages] = useState([]);
   const { user } = useContext(AccountContext);
+  const { currentChat } = useContext(ChatContext);
   const [refresh, setRefresh] = useState(false);
   const latestMessages = useRef(null);
 
   useEffect(() => {
     scrollToBottom();
+    console.log(currentChat[0].username);
   }, [allMessages]);
 
   const scrollToBottom = () => {
@@ -23,7 +26,16 @@ const MessageBox = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:4000/auth/getmessages")
+    fetch(
+      `http://localhost:4000/auth/getmessages?chatroom=${currentChat[0].username}`,
+      {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
@@ -33,11 +45,13 @@ const MessageBox = () => {
         } else {
           // Handle the case where retrieving messages failed
           console.log(data.message);
+          setAllMessages("Couldnt get messages :(");
         }
       })
       .catch((error) => {
         // Handle any network or request errors
         console.log(error);
+        setAllMessages("Couldnt get messages :(");
       });
   }, [refresh]);
 
