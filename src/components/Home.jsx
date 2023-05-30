@@ -32,6 +32,7 @@ const Home = () => {
           <Button
             onClick={handleLogout}
             size="large"
+            color="error"
             sx={{ position: "absolute", top: 0, right: 0 }}
           >
             Logout?
@@ -43,16 +44,32 @@ const Home = () => {
             sx={{
               display: "flex",
               height: "85vh",
-              border: "2px solid red",
+              border: "1px solid black",
+              borderRadius: "20px",
+              "@media (max-width: 600px)": {
+                display: "block",
+                border: "none",
+                height: "fit-content",
+              },
             }}
           >
-            <Box sx={{ width: "200px" }}>
+            <Box
+              sx={{
+                width: "200px",
+                "@media (max-width: 600px)": {
+                  height: "min-content",
+                  width: "100vw",
+                },
+              }}
+            >
               <Sidebar />
             </Box>
             <Box
               sx={{
                 width: "70vw",
-                border: "1px solid black",
+                "@media (max-width: 600px)": {
+                  width: "100vw",
+                },
               }}
             >
               <ChatRoom />

@@ -8,17 +8,21 @@ const ChatRoom = () => {
   const { currentChat } = useContext(ChatContext);
 
   const chat = currentChat.map((chat) => (
-    <Box
-      sx={{ position: "relative", height: "85vh", border: "1px solid blue" }}
-      key={chat.username}
-    >
+    <Box sx={{ position: "relative", height: "85vh" }} key={chat.username}>
       {chat.username == "public" ? (
         <small>Public Chat Room</small>
       ) : (
         <small>{chat.username}'s Chat Room</small>
       )}
       <MessageBox />
-      <Box sx={{ position: "absolute", bottom: 15, width: "100%" }}>
+      <Box
+        sx={{
+          position: "absolute",
+          bottom: 9,
+          width: "100%",
+          height: "58px",
+        }}
+      >
         <ChatBar />
       </Box>
     </Box>

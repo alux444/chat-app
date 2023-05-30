@@ -32,9 +32,8 @@ const JoinRoom = ({ open, close }) => {
       <Modal open={open} onClose={close}>
         <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
             alignItems: "center",
+            justifyContent: "center",
             position: "absolute",
             top: "50%",
             left: "50%",
@@ -47,17 +46,20 @@ const JoinRoom = ({ open, close }) => {
             p: 4,
           }}
         >
-          <Typography variant="small">Join room</Typography>
-
-          <form onSubmit={onSubmit}>
+          <form
+            onSubmit={onSubmit}
+            sx={{ width: "100%", display: "flex", gap: "15px" }}
+          >
             <Input
-              sx={{ width: "300px" }}
+              sx={{ width: "70%" }}
               onChange={handleUserChange}
               placeholder="Username"
               type="text"
               value={currentUsername}
             />
-            <Button type="submit">Join room!</Button>
+            <button style={{ width: "25%", margin: "5px" }} type="submit">
+              Join room!
+            </button>
           </form>
         </Box>
       </Modal>

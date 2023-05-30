@@ -77,14 +77,13 @@ const MessageBox = () => {
           sx={{
             alignSelf:
               message.username === user.username ? "flex-end" : "flex-start",
-            border: "2px solid green",
+            border: "2px solid #646cff;",
             padding: "5px",
             borderRadius: "10px",
             wordBreak: "break-word",
             maxWidth: "80%",
             backgroundColor: "rgba(255,255,255,0.8)",
             color: "black",
-            margin: "0 10px",
           }}
         >
           {message.message}
@@ -96,11 +95,13 @@ const MessageBox = () => {
   return (
     <Box
       sx={{
-        border: "1px solid red",
+        border: "1px solid black",
         height: "85%",
         display: "flex",
         flexDirection: "column",
         overflow: "auto",
+        margin: "5px",
+        padding: "5px",
       }}
     >
       {mappedMessages}

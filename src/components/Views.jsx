@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
 import SignUp from "./SignUp";
 import Login from "./Login";
+import About from "./About";
 import Home from "./Home";
 import PrivateRoutes from "./PrivateRoutes";
 import { AccountContext } from "./AccountContext";
@@ -28,6 +29,7 @@ const Views = () => {
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/about" element={<About />} />
       <Route path="*" element={<Login />} />
       <Route element={<PrivateRoutes />}>
         <Route path="/home" element={<Home />} />

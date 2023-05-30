@@ -88,31 +88,32 @@ const Login = () => {
     >
       <p>Login</p>
 
-      <FormControl sx={{ margin: "10px", padding: "10px" }}>
-        <label>Username</label>
-        <Input
-          sx={{ width: "300px" }}
-          onChange={handleUserChange}
-          placeholder="Username"
-          type="text"
-          value={currentUsername}
-        />
-      </FormControl>
+      <form onSubmit={onSubmit}>
+        <FormControl sx={{ margin: "10px", padding: "10px" }}>
+          <label>Username</label>
+          <Input
+            sx={{ width: "300px" }}
+            onChange={handleUserChange}
+            placeholder="Username"
+            type="text"
+            value={currentUsername}
+          />
+        </FormControl>
 
-      <FormControl sx={{ margin: "10px", padding: "10px" }}>
-        <label>Password</label>
-        <Input
-          sx={{ width: "300px" }}
-          onChange={handlePassChange}
-          placeholder="Password"
-          type="password"
-          value={currentPassword}
-        />
-      </FormControl>
+        <FormControl sx={{ margin: "10px", padding: "10px" }}>
+          <label>Password</label>
+          <Input
+            sx={{ width: "300px" }}
+            onChange={handlePassChange}
+            placeholder="Password"
+            type="password"
+            value={currentPassword}
+          />
+        </FormControl>
 
-      <p>{error}</p>
-      <form>
-        <Button onClick={onSubmit}>Login</Button>
+        <p>{error}</p>
+        <Button type="submit">Login</Button>
+
         <Link to="/signup">
           <Button>Create Account</Button>
         </Link>

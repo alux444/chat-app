@@ -1,12 +1,11 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "./AccountContext";
-import { Button, TextField } from "@mui/material";
+import { TextField, Box } from "@mui/material";
 import socket from "../../server/socket";
 import { ChatContext } from "./Home";
 
 const ChatBar = () => {
   const [message, setMessage] = useState("");
-  const [error, setError] = useState("");
   const { user } = useContext(AccountContext);
   const { currentChat } = useContext(ChatContext);
 
@@ -18,6 +17,12 @@ const ChatBar = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    if (message.length === 0) {
+      alert("Please enter a message.");
+      return;
+    }
+
     const submittedMessage = {
       username: user.username,
       message: message,
@@ -54,23 +59,25 @@ const ChatBar = () => {
   };
 
   return (
-    <form onSubmit={onSubmit}>
-      <TextField
-        type="text"
-        value={message}
-        placeholder="Send a message!"
-        onChange={handleChange}
-        sx={{
-          backgroundColor: "rgba(255,255,255,0.8)",
-          color: "black",
-          width: "80%",
-          borderRadius: "20px",
-        }}
-      />
-      <Button size="large" type="submit">
-        Send Message
-      </Button>
-    </form>
+    <Box sx={{ height: "100%" }}>
+      <form onSubmit={onSubmit}>
+        <TextField
+          type="text"
+          value={message}
+          placeholder="Send a message!"
+          onChange={handleChange}
+          sx={{
+            backgroundColor: "rgba(255,255,255,0.8)",
+            color: "black",
+            width: "calc(100% - 220px)",
+            borderRadius: "20px",
+          }}
+        />
+        <button style={{ width: "100px", height: "58px", margin: "0 5px" }}>
+          Send Message
+        </button>
+      </form>
+    </Box>
   );
 };
 
