@@ -96,7 +96,6 @@ const SignUp = () => {
         width: "500px",
         margin: "auto",
         justifyContent: "center",
-        height: "100vh",
         border: "1px solid white",
         background: "rgba(255,255,255,0.1)",
       }}

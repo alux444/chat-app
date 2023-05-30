@@ -60,7 +60,7 @@ const Sidebar = () => {
         overflow: "auto",
         height: "100%",
         padding: "5px",
-        width: "100vw",
+        width: "100%",
         "@media (max-width: 600px)": {
           display: "flex",
           flexWrap: "wrap",

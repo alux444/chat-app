@@ -58,7 +58,7 @@ const Home = () => {
                 width: "200px",
                 "@media (max-width: 600px)": {
                   height: "min-content",
-                  width: "100vw",
+                  width: "90vw",
                 },
               }}
             >
@@ -68,7 +68,7 @@ const Home = () => {
               sx={{
                 width: "70vw",
                 "@media (max-width: 600px)": {
-                  width: "100vw",
+                  width: "96vw",
                 },
               }}
             >

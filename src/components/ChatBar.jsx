@@ -69,7 +69,7 @@ const ChatBar = () => {
           sx={{
             backgroundColor: "rgba(255,255,255,0.8)",
             color: "black",
-            width: "calc(100% - 220px)",
+            width: "calc(100% - 130px)",
             borderRadius: "20px",
           }}
         />

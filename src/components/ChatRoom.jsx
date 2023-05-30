@@ -21,6 +21,10 @@ const ChatRoom = () => {
           bottom: 9,
           width: "100%",
           height: "58px",
+          "@media (max-width: 600px)": {
+            position: "initial",
+            width: "100vw",
+          },
         }}
       >
         <ChatBar />
