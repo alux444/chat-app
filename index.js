@@ -16,6 +16,7 @@ app.use(cors(corsConfig));
 app.use(express.json());
 app.use(sessionMiddleware);
 app.use("/auth", router);
+app.set("trust proxy", 1);
 
 app.get("/", (req, res) => {
   res.send("Hello, World!");
@@ -23,7 +24,7 @@ app.get("/", (req, res) => {
 
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     credentials: true,
   },
 });

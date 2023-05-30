@@ -1,11 +1,4 @@
-import {
-  Modal,
-  Typography,
-  Box,
-  Input,
-  FormControl,
-  Button,
-} from "@mui/material";
+import { Modal, Box, Input } from "@mui/material";
 import React, { useContext, useState } from "react";
 import { FriendContext } from "./Home";
 

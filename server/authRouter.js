@@ -18,7 +18,7 @@ router
 
 router.post("/signup", validate, rateLimiter(3, 60), handleSignup);
 
-router.post("/messages", rateLimiter(20, 30), handleMessage);
+router.post("/messages", rateLimiter(10, 30), handleMessage);
 
 router.get("/getmessages", getMessages);
 

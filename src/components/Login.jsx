@@ -44,7 +44,7 @@ const Login = () => {
 
     console.log(JSON.stringify(values));
 
-    fetch("http://localhost:4000/auth/login", {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
       method: "POST",
       credentials: "include",
       headers: {

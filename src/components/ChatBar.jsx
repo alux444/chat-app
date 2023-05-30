@@ -1,8 +1,8 @@
 import React, { useContext, useState } from "react";
 import { AccountContext } from "./AccountContext";
 import { TextField, Box } from "@mui/material";
-import socket from "../../server/socket";
 import { ChatContext } from "./Home";
+import socket from "./socket";
 
 const ChatBar = () => {
   const [message, setMessage] = useState("");
@@ -29,7 +29,7 @@ const ChatBar = () => {
       chatroom: currentChat[0].username,
     };
 
-    fetch("http://localhost:4000/auth/messages", {
+    fetch(`${process.env.SERVER_URL}/auth/messages`, {
       method: "POST",
       credentials: "include",
       headers: {
@@ -48,9 +48,6 @@ const ChatBar = () => {
       })
       .then((data) => {
         if (!data) return;
-        else {
-          setError(data.status);
-        }
 
         socket.emit("new-message", true);
       });

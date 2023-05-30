@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import Views from "./components/Views";
 import UserContext from "./components/AccountContext";
 import NavBar from "./components/Navbar";
@@ -9,11 +10,11 @@ function App() {
   return (
     <>
       <UserContext>
-        <Router>
+        <HashRouter>
           <NavBar />
           <Views />
           <Footer />
-        </Router>
+        </HashRouter>
       </UserContext>
     </>
   );

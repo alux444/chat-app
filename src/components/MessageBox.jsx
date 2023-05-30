@@ -2,7 +2,7 @@ import { Box, Button, Typography } from "@mui/material";
 import React, { useContext } from "react";
 import { useEffect, useState, useRef } from "react";
 import { AccountContext } from "./AccountContext";
-import socket from "../../server/socket";
+import socket from "./socket";
 import { ChatContext } from "./Home";
 
 const MessageBox = () => {

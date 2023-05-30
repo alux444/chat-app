@@ -20,6 +20,6 @@ export const sessionMiddleware = session({
 });
 
 export const corsConfig = {
-  origin: "http://localhost:5173",
+  origin: process.env.CLIENT_URL,
   credentials: true,
 };

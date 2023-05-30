@@ -59,7 +59,7 @@ const SignUp = () => {
 
     console.log(JSON.stringify(values));
 
-    fetch("http://localhost:4000/auth/signup", {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/auth/signup`, {
       method: "POST",
       credentials: "include",
       headers: {
