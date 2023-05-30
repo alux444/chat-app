@@ -12,10 +12,11 @@ const ChatRoom = () => {
       sx={{ position: "relative", height: "85vh", border: "1px solid blue" }}
       key={chat.username}
     >
-      <small>
-        Currently chatting with : {chat.username} (
-        {chat.connected ? "online" : "offline"})
-      </small>
+      {chat.username == "public" ? (
+        <small>Public Chat Room</small>
+      ) : (
+        <small>{chat.username}'s Chat Room</small>
+      )}
       <MessageBox />
       <Box sx={{ position: "absolute", bottom: 15, width: "100%" }}>
         <ChatBar />

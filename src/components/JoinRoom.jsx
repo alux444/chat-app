@@ -6,9 +6,12 @@ import {
   FormControl,
   Button,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { FriendContext } from "./Home";
 
-const AddFriend = ({ open, close }) => {
+const JoinRoom = ({ open, close }) => {
+  const { friendList, setFriendList } = useContext(FriendContext);
+
   const [currentUsername, setCurrentUsername] = useState("");
 
   const handleUserChange = (e) => {
@@ -19,8 +22,9 @@ const AddFriend = ({ open, close }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    alert("Friend request sent to: " + currentUsername);
+    alert("Joined " + currentUsername + "'s Room!");
     setCurrentUsername("");
+    setFriendList([...friendList, { username: currentUsername }]);
   };
 
   return (
@@ -43,7 +47,7 @@ const AddFriend = ({ open, close }) => {
             p: 4,
           }}
         >
-          <Typography variant="small">Add a friend</Typography>
+          <Typography variant="small">Join room</Typography>
 
           <form onSubmit={onSubmit}>
             <Input
@@ -53,7 +57,7 @@ const AddFriend = ({ open, close }) => {
               type="text"
               value={currentUsername}
             />
-            <Button type="submit">Add Friend!</Button>
+            <Button type="submit">Join room!</Button>
           </form>
         </Box>
       </Modal>
@@ -61,4 +65,4 @@ const AddFriend = ({ open, close }) => {
   );
 };
 
-export default AddFriend;
+export default JoinRoom;

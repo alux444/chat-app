@@ -9,14 +9,15 @@ export const FriendContext = createContext();
 export const ChatContext = createContext();
 
 const Home = () => {
+  const { user, setUser } = useContext(AccountContext);
+
   const [friendList, setFriendList] = useState([
-    { username: "Chatbot", connected: true },
+    { username: user.username, connected: true },
   ]);
   const [currentChat, setCurrentChat] = useState([
     { username: "public", connected: true },
   ]);
 
-  const { user, setUser } = useContext(AccountContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {

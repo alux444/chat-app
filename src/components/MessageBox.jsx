@@ -14,7 +14,6 @@ const MessageBox = () => {
 
   useEffect(() => {
     scrollToBottom();
-    console.log(currentChat[0].username);
   }, [allMessages]);
 
   const scrollToBottom = () => {
@@ -40,7 +39,6 @@ const MessageBox = () => {
       .then((data) => {
         if (data.success) {
           // Process the messages received from the backend
-          console.log(data.messages); // Use `data.messages` instead of `messages`
           setAllMessages(data.messages);
         } else {
           // Handle the case where retrieving messages failed

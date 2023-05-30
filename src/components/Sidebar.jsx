@@ -1,12 +1,12 @@
 import React, { useState, useContext } from "react";
 import { Box, Button } from "@mui/material";
 import { ChatContext, FriendContext } from "./Home";
-import AddFriend from "./AddFriend";
+import JoinRoom from "./JoinRoom";
 
 const Sidebar = () => {
   const test = () => {};
 
-  const { friendList, setFriendList } = useContext(FriendContext);
+  const { friendList } = useContext(FriendContext);
   const { setCurrentChat } = useContext(ChatContext);
   const [openAddFriend, setOpenAddFriend] = useState(false);
 
@@ -28,25 +28,26 @@ const Sidebar = () => {
           setCurrentChat([
             {
               username: friend.username,
-              connected: friend.connected,
             },
           ])
         }
         size="small"
         sx={{
           display: "block",
-          border: "3px solid",
-          borderColor: friend.connected ? "green" : "red",
+          border: "3px solid transparent",
           width: "150px",
           padding: "5px",
           margin: "5px",
           borderRadius: "27px",
           backgroundColor: "rgba(255,255,255,0.8)",
           color: "black",
+          "&:hover": {
+            backgroundColor: "transparent",
+            color: "white",
+          },
         }}
       >
-        <h3>{friend.username}</h3>
-        <small>{friend.connected ? "Online" : "Offline"}</small>
+        <p>{friend.username}'s Room</p>
       </Button>
     </Box>
   ));
@@ -60,24 +61,40 @@ const Sidebar = () => {
         padding: "5px",
       }}
     >
-      <button onClick={test}>aa</button>
       <Button
         onClick={openAddFriends}
         sx={{
+          border: "3px solid transparent",
           width: "150px",
+          height: "100px",
           padding: "5px",
-          margin: "1  5px",
-          borderRadius: "15px",
+          margin: "5px",
+          borderRadius: "27px",
+          backgroundColor: "rgba(255,255,255,0.8)",
+          color: "black",
+          "&:hover": {
+            backgroundColor: "transparent",
+            color: "white",
+            border: "3px solid green",
+          },
         }}
       >
-        Add Friend
+        Join Room
       </Button>
       <Button
         sx={{
+          border: "3px solid",
           width: "150px",
+          height: "50px",
           padding: "5px",
-          margin: "1  5px",
-          borderRadius: "15px",
+          margin: "5px",
+          borderRadius: "27px",
+          backgroundColor: "rgba(255,255,255,0.8)",
+          color: "black",
+          "&:hover": {
+            backgroundColor: "transparent",
+            color: "white",
+          },
         }}
         onClick={() =>
           setCurrentChat([{ username: "public", connected: true }])
@@ -86,7 +103,7 @@ const Sidebar = () => {
         Public Chat
       </Button>
       {friends}
-      <AddFriend open={openAddFriend} close={closeAddFriends} />
+      <JoinRoom open={openAddFriend} close={closeAddFriends} />
     </Box>
   );
 };
