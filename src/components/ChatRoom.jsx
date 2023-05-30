@@ -17,7 +17,7 @@ const ChatRoom = () => {
         {chat.connected ? "online" : "offline"})
       </small>
       <MessageBox />
-      <Box sx={{ position: "absolute", bottom: 0, width: "100%" }}>
+      <Box sx={{ position: "absolute", bottom: 15, width: "100%" }}>
         <ChatBar />
       </Box>
     </Box>

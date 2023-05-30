@@ -55,10 +55,6 @@ const MessageBox = () => {
       });
   }, [refresh]);
 
-  const test = () => {
-    console.log(refresh);
-  };
-
   const mappedMessages = allMessages.map((message) => (
     <Box
       key={message.id}
@@ -88,6 +84,9 @@ const MessageBox = () => {
             borderRadius: "10px",
             wordBreak: "break-word",
             maxWidth: "80%",
+            backgroundColor: "rgba(255,255,255,0.8)",
+            color: "black",
+            margin: "0 10px",
           }}
         >
           {message.message}
@@ -106,7 +105,6 @@ const MessageBox = () => {
         overflow: "auto",
       }}
     >
-      <button onClick={test}>aaa</button>
       {mappedMessages}
       <div ref={latestMessages} />
     </Box>

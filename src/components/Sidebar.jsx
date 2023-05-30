@@ -41,6 +41,8 @@ const Sidebar = () => {
           padding: "5px",
           margin: "5px",
           borderRadius: "27px",
+          backgroundColor: "rgba(255,255,255,0.8)",
+          color: "black",
         }}
       >
         <h3>{friend.username}</h3>

@@ -56,10 +56,16 @@ const ChatBar = () => {
   return (
     <form onSubmit={onSubmit}>
       <TextField
-        sx={{ width: "500px" }}
         type="text"
         value={message}
+        placeholder="Send a message!"
         onChange={handleChange}
+        sx={{
+          backgroundColor: "rgba(255,255,255,0.8)",
+          color: "black",
+          width: "80%",
+          borderRadius: "20px",
+        }}
       />
       <Button size="large" type="submit">
         Send Message
