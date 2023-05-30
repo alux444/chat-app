@@ -139,9 +139,11 @@ const SignUp = () => {
 
       <p>{error}</p>
       <form>
-        <Button onClick={onSubmit}>Sign up!</Button>
+        <Button onClick={onSubmit} variant="contained" sx={{ margin: "0 5px" }}>
+          Sign up!
+        </Button>
         <Link to="/">
-          <Button>Already have an account?</Button>
+          <Button variant="contained">Already have an account?</Button>
         </Link>
       </form>
     </Box>

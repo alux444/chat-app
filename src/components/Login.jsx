@@ -111,10 +111,12 @@ const Login = () => {
         </FormControl>
 
         <p>{error}</p>
-        <Button type="submit">Login</Button>
+        <Button type="submit" variant="contained" sx={{ margin: "0 5px" }}>
+          Login
+        </Button>
 
         <Link to="/signup">
-          <Button>Create Account</Button>
+          <Button variant="contained">Create Account</Button>
         </Link>
       </form>
     </Box>
