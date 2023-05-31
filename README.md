@@ -22,15 +22,25 @@ CREATE TABLE messages (
 2. npm install (installs dependencies from package.json)
 
 3. Create .env file in the project folder with:
+
 VITE_DATABASE_NAME=(Your database name here)
+
 VITE_DATABASE_HOST=(Your database hostname here)
+
 VITE_DATABASE_USER=(Your database username here)
+
 VITE_DATABASE_PASSWORD=(Your database password here)
+
 VITE_DATABASE_PORT=5432 (Default postgres port)
-COOKIE_SECRET=(Your cookie here)
+
+COOKIE_SECRET=(Your cookie here (can be any random string))
+
 CLIENT_URL=http://localhost:5173 (Default Vite port)
+
 VITE_SERVER_URL=http://localhost:4000 
+
 NODE_ENV=production
+
 PORT=4000
 
 4. npm test (starts the local server)
