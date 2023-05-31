@@ -29,7 +29,7 @@ const ChatBar = () => {
       chatroom: currentChat[0].username,
     };
 
-    fetch(`${process.env.SERVER_URL}/auth/messages`, {
+    fetch(`${import.meta.env.VITE_SERVER_URL}/auth/messages`, {
       method: "POST",
       credentials: "include",
       headers: {
