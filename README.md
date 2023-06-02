@@ -2,7 +2,7 @@
 This is a fullstack chat app created with ReactJS, styled with MaterialsUI. The backend server uses ExpressJS,, SocketIO and Redis for managing user sessions. The user database is stored in PostgreSQL.
 
 # To run locally:
-1. Ensure your device has Redis and Postgres installed.
+1. Ensure your device has Postgres installed.
  - In your postgres database, create these tables: 
 
 CREATE TABLE users (  
