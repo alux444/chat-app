@@ -6,7 +6,8 @@ import express from "express";
 import { Server } from "socket.io";
 import dotenv from "dotenv";
 dotenv.config();
-import { sessionMiddleware, corsConfig } from "./server/serverControl.js";
+import { sessionMiddleware } from "./server/sessionStore.js";
+import { corsConfig } from "./server/serverControl.js";
 
 const app = express();
 const server = createServer(app);

@@ -11,14 +11,11 @@ import { rateLimiter } from "./rateLimiter.js";
 
 const router = express.Router();
 
-router
-  .route("/login")
-  .get(handleLogin)
-  .post(validate, rateLimiter(20, 50), attemptLogin);
+router.route("/login").get(handleLogin).post(validate, attemptLogin);
 
-router.post("/signup", validate, rateLimiter(20, 60), handleSignup);
+router.post("/signup", validate, handleSignup);
 
-router.post("/messages", rateLimiter(20, 30), handleMessage);
+router.post("/messages", handleMessage);
 
 router.get("/getmessages", getMessages);
 
